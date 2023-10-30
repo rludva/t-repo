@@ -1,0 +1,14 @@
+schemaVersion: 2.2.0
+# schemaVersion changed from 2.2.0 to 2.1.0.. (radmi)
+
+metadata:
+  name: ubi9-fix-ws
+
+components:
+  - container:
+      image: quay.io/rludva/nutius-udi-dotnet:v1.0
+      cpuRequest: 1000m
+      memoryLimit: 8Gi
+      mountSources: true
+      args: ['tail', '-f', '/dev/null']
+    name: dotnetcore-sidecar
