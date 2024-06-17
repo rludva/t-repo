@@ -24,7 +24,7 @@ components:
       mountSources: true
       volumeMounts:
         - name: config-volume
-          path: /demo
+          path: /demo/demo.txt
       endpoints:
         - name: http-8080
           targetPort: 8080
