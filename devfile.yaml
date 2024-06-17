@@ -24,7 +24,7 @@ components:
       mountSources: true
       volumeMounts:
         - name: config-volume
-          path: /home/alice/config.txt
+          path: /home/alice
       endpoints:
         - name: http-8080
           targetPort: 8080
@@ -32,6 +32,8 @@ components:
   - name: config-volume
     volume:
       size: 10Mi
+      configMap:
+        name: my-configmap
 
 commands:
   - id: build
