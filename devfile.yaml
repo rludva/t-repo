@@ -1,27 +1,31 @@
-schemaVersion: 2.2.0
+schemaVersion: 2.2.2
 metadata:
-  name: testdevfile
+  name: nodejs
 components:
-  - type: kubernetes-configmap
-    name: my-configmap
-    alias: my-configmap
-    properties:
-      name: my-configmap
-      data:
-        key1: value1
-        key2: value2  
-  - name: universal-developer-image
+  - name: myk8cm
+    kubernetes:
+      inlined:
+        apiVersion: v1
+        kind: ConfigMap
+        metadata:
+          name: disconnected-env
+          annotations:
+            controller.devfile.io/mount-as: env
+        data:
+          key1: value1
+          key2: value2 
+  - name: nodejs
     attributes:
       container-overrides: {"securityContext": {"privileged": true}}
       pod-overrides: {"metadata": {"annotations": {"io.kubernetes.cri-o.Devices":"/dev/fuse"}}}
     container:
-      image: registry.redhat.io/devspaces/udi-rhel8@sha256:042d06a9f481cf1d65a81632a9c069c318f80537e01db7d864dfecfb0bc5714c
+      image: registry.redhat.io/devspaces/udi-rhel8:3.14-6
       volumeMounts:
         - name: venv
           path: /home/user/.venv
-      memoryLimit: '2Gi'
-      memoryRequest: '1Gi'
-      cpuLimit: '1'
+      memoryLimit: '8Gi'
+      memoryRequest: '4Gi'
+      cpuLimit: '2'
       cpuRequest: '1'
       mountSources: true
   - name: venv
