@@ -13,6 +13,9 @@ components:
       cpuLimit: '1'
       cpuRequest: '1'
       mountSources: true
+      - name: env
+        volume:
+        size: 5G
     kubernetes:
       inlined:
         apiVersion: v1
@@ -24,7 +27,4 @@ components:
         data:
           key1: value1
           key2: value2 
-  - name: env
-    volume:
-      size: 5G
 commands: []
