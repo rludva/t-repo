@@ -23,13 +23,13 @@ components:
       memoryLimit: 512Mi
       mountSources: true
       volumeMounts:
-        - name: my-configmap-volume
-          path: path: /home/alice/config.txt
+        - name: config-volume
+          path: /home/alice/config.txt
       endpoints:
         - name: http-8080
           targetPort: 8080
 
-  - name: my-configmap-volume
+  - name: config-volume
     volume:
       size: 10Mi
 
