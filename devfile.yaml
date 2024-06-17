@@ -23,16 +23,15 @@ components:
       memoryLimit: 512Mi
       mountSources: true
       volumeMounts:
-        - name: config-volume
+        - name: my-configmap-volume
           path: /etc/config
       endpoints:
         - name: http-8080
           targetPort: 8080
-          
-volumes:
-  - name: config-volume
-    configMap:
-      name: my-configmap  
+
+  - name: my-configmap-volume
+    volume:
+      size: 1Gi
 
 commands:
   - id: build
