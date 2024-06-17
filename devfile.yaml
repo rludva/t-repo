@@ -24,6 +24,8 @@ components:
       mountSources: true
       volumeMounts:
         - name: config-volume
+          configMap:
+            name: my-configmap
           path: /demo
       endpoints:
         - name: http-8080
