@@ -24,30 +24,13 @@ components:
       mountSources: true
       volumeMounts:
         - name: my-configmap-volume
-          path: /home/user/
+          path: path: /home/alice/config.txt
       endpoints:
         - name: http-8080
           targetPort: 8080
 
   - name: my-configmap-volume
     volume:
+      configMap:
+        name: my-configmap
       size: 10Mi
-
-commands:
-  - id: build
-    exec:
-      component: my-container
-      commandLine: "mvn clean install"
-      workingDir: /projects/my-app
-      group:
-        kind: build
-        isDefault: true
-
-  - id: run
-    exec:
-      component: my-container
-      commandLine: "java -jar /projects/my-app/target/my-app.jar"
-      workingDir: /projects/my-app
-      group:
-        kind: run
-        isDefault: true
