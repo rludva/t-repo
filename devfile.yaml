@@ -5,18 +5,6 @@ metadata:
   description: "A sample devfile to demonstrate ConfigMap mounting"
 
 components:
-  - name: my-container
-    container:
-      image: my-sample-image:latest
-      memoryLimit: 512Mi
-      mountSources: true
-      volumeMounts:
-        - name: config-volume
-          path: /etc/config
-      endpoints:
-        - name: http-8080
-          targetPort: 8080
-
   - name: config-volume
     kubernetes:
       inlined: |
@@ -29,6 +17,18 @@ components:
             key1=value1
             key2=value2
 
+  - name: my-container
+    container:
+      image: my-sample-image:latest
+      memoryLimit: 512Mi
+      mountSources: true
+      volumeMounts:
+        - name: config-volume
+          path: /etc/config
+      endpoints:
+        - name: http-8080
+          targetPort: 8080
+          
 commands:
   - id: build
     exec:
