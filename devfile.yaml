@@ -4,6 +4,11 @@ metadata:
   version: 1.0.0
   description: "A sample devfile to demonstrate ConfigMap mounting"
 
+volumes:
+  - name: config-volume
+    configMap:
+      name: my-configmap  
+
 components:
   - name: config-volume
     kubernetes:
