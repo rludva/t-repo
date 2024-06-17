@@ -29,7 +29,7 @@ components:
         - name: http-8080
           targetPort: 8080
 
-  - name: config-volume
+  - name: my-config-volume
     volume:
       size: 10Mi
 
