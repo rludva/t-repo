@@ -31,6 +31,4 @@ components:
 
   - name: my-configmap-volume
     volume:
-      configMap:
-        name: my-configmap
       size: 10Mi
