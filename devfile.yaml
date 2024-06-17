@@ -5,7 +5,7 @@ metadata:
   description: "A sample devfile to demonstrate ConfigMap mounting"
 
 components:
-  - name: config-volume
+  - name: cm-config-volume
     kubernetes:
       inlined: |
         apiVersion: v1
@@ -29,7 +29,7 @@ components:
         - name: http-8080
           targetPort: 8080
 
-  - name: my-config-volume
+  - name: config-volume
     volume:
       size: 10Mi
 
