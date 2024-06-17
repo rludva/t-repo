@@ -19,7 +19,7 @@ components:
 
   - name: my-container
     container:
-      image: my-sample-image:latest
+      image: registry.redhat.io/devspaces/udi-rhel8@sha256:042d06a9f481cf1d65a81632a9c069c318f80537e01db7d864dfecfb0bc5714c
       memoryLimit: 512Mi
       mountSources: true
       volumeMounts:
