@@ -3,6 +3,16 @@ metadata:
   name: nodejs
 components:
   - name: myk8cm
+    container:
+      image: registry.redhat.io/devspaces/udi-rhel8:3.14-6
+      volumeMounts:
+        - name: env
+          path: /home/user/env
+      memoryLimit: '2Gi'
+      memoryRequest: '1Gi'
+      cpuLimit: '1'
+      cpuRequest: '1'
+      mountSources: true
     kubernetes:
       inlined:
         apiVersion: v1
@@ -14,21 +24,7 @@ components:
         data:
           key1: value1
           key2: value2 
-  - name: nodejs
-    attributes:
-      container-overrides: {"securityContext": {"privileged": true}}
-      pod-overrides: {"metadata": {"annotations": {"io.kubernetes.cri-o.Devices":"/dev/fuse"}}}
-    container:
-      image: registry.redhat.io/devspaces/udi-rhel8:3.14-6
-      volumeMounts:
-        - name: venv
-          path: /home/user/.venv
-      memoryLimit: '8Gi'
-      memoryRequest: '4Gi'
-      cpuLimit: '2'
-      cpuRequest: '1'
-      mountSources: true
-  - name: venv
+  - name: env
     volume:
       size: 5G
 commands: []
