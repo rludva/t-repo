@@ -32,3 +32,22 @@ components:
   - name: my-configmap-volume
     volume:
       size: 10Mi
+
+commands:
+  - id: build
+    exec:
+      component: my-container
+      commandLine: "mvn clean install"
+      workingDir: /projects/my-app
+      group:
+        kind: build
+        isDefault: true
+
+  - id: run
+    exec:
+      component: my-container
+      commandLine: "java -jar /projects/my-app/target/my-app.jar"
+      workingDir: /projects/my-app
+      group:
+        kind: run
+        isDefault: true
