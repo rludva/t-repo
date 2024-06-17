@@ -1,30 +1,49 @@
 schemaVersion: 2.2.2
 metadata:
-  name: nodejs
+  name: my-sample-devfile
+  version: 1.0.0
+  description: "A sample devfile to demonstrate ConfigMap mounting"
+
 components:
-  - name: myk8cm
+  - name: my-container
     container:
-      image: registry.redhat.io/devspaces/udi-rhel8:3.14-6
-      volumeMounts:
-        - name: env
-          path: /home/user/env
-      memoryLimit: '2Gi'
-      memoryRequest: '1Gi'
-      cpuLimit: '1'
-      cpuRequest: '1'
+      image: my-sample-image:latest
+      memoryLimit: 512Mi
       mountSources: true
-      - name: env
-        volume:
-        size: 5G
+      volumeMounts:
+        - name: config-volume
+          path: /etc/config
+      endpoints:
+        - name: http-8080
+          targetPort: 8080
+
+  - name: config-volume
     kubernetes:
-      inlined:
+      inlined: |
         apiVersion: v1
         kind: ConfigMap
         metadata:
-          name: disconnected-env
-          annotations:
-            controller.devfile.io/mount-as: env
+          name: my-configmap
         data:
-          key1: value1
-          key2: value2 
-commands: []
+          my-config-file.conf: |
+            key1=value1
+            key2=value2
+
+commands:
+  - id: build
+    exec:
+      component: my-container
+      commandLine: "mvn clean install"
+      workingDir: /projects/my-app
+      group:
+        kind: build
+        isDefault: true
+
+  - id: run
+    exec:
+      component: my-container
+      commandLine: "java -jar /projects/my-app/target/my-app.jar"
+      workingDir: /projects/my-app
+      group:
+        kind: run
+        isDefault: true
