@@ -4,11 +4,6 @@ metadata:
   version: 1.0.0
   description: "A sample devfile to demonstrate ConfigMap mounting"
 
-volumes:
-  - name: config-volume
-    configMap:
-      name: my-configmap  
-
 components:
   - name: config-volume
     kubernetes:
@@ -34,6 +29,11 @@ components:
         - name: http-8080
           targetPort: 8080
           
+volumes:
+  - name: config-volume
+    configMap:
+      name: my-configmap  
+
 commands:
   - id: build
     exec:
