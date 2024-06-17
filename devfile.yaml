@@ -13,7 +13,7 @@ components:
         metadata:
           name: my-configmap
         data:
-          my-config-file.conf: |
+          demo.txt: |
             key1=value1
             key2=value2
 
@@ -24,14 +24,14 @@ components:
       mountSources: true
       volumeMounts:
         - name: my-configmap-volume
-          path: /etc/config
+          path: /home/user/
       endpoints:
         - name: http-8080
           targetPort: 8080
 
   - name: my-configmap-volume
     volume:
-      size: 1Gi
+      size: 10Mi
 
 commands:
   - id: build
